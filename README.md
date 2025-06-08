@@ -87,8 +87,8 @@ npm run test:watch
 - [React Testing Library Documentation](https://testing-library.com/docs/react-testing-library/intro/)
 - [Jest DOM Testing Library](https://github.com/testing-library/jest-dom)
 
-
-3. Vela Larrea, David Enrique
+HISTORIAS DE USUARIO:
+Vela Larrea, David Enrique
 HU: Registrar inventario de bienes comunes / Actualizar estado de bienes comunes
 Tareas:
 
