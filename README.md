@@ -86,3 +86,12 @@ npm run test:watch
 - [Jest Documentation](https://jestjs.io/docs/getting-started)
 - [React Testing Library Documentation](https://testing-library.com/docs/react-testing-library/intro/)
 - [Jest DOM Testing Library](https://github.com/testing-library/jest-dom)
+
+
+3. Vela Larrea, David Enrique
+HU: Registrar inventario de bienes comunes / Actualizar estado de bienes comunes
+Tareas:
+
+TA008 Crear formulario de registro de bienes
+
+TA009 Crear función para actualizar estado de bien común
