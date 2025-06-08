@@ -13,7 +13,7 @@ export default function TodoItem({
   completed,
   onToggle,
   onDelete,
-  dataTestId,
+  dataTestId = "todo-item-text", // valor por defecto para dataTestId
 }: TodoItemProps) {
   return (
     <div className="flex items-center justify-between p-4 border-b border-gray-200">
@@ -24,10 +24,11 @@ export default function TodoItem({
           onChange={() => onToggle(id)}
           className="w-4 h-4 mr-2 cursor-pointer"
           data-testid="todo-checkbox"
+          aria-checked={completed} // Accesibilidad
         />
         <span
           className={`${completed ? "line-through text-gray-400" : ""}`}
-          data-testid={`${dataTestId}`}
+          data-testid={dataTestId} // Usa el dataTestId que se pasa o el valor por defecto
         >
           {text}
         </span>

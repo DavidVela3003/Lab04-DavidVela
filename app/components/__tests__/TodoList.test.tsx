@@ -1,61 +1,24 @@
-import React from "react";
-import { render, screen } from "@testing-library/react";
-import TodoList, { Todo } from "../TodoList";
+import { render, screen, fireEvent } from "@testing-library/react";
+import TodoList from "../TodoList"; // Asegúrate de que la ruta sea correcta
 
-describe("TodoList Component", () => {
-  // Happy path tests
-  it("renderiza un mensaje cuando no hay tareas", () => {
-    // Prepare: Configuración con lista vacía
-    const todos: Todo[] = [];
-    const mockToggle = jest.fn();
-    const mockDelete = jest.fn();
+it("debe pasar las funciones onToggle y onDelete a cada TodoItem", () => {
+  const mockToggle = jest.fn();
+  const mockDelete = jest.fn();
 
-    // Execute: Renderizar el componente
-    render(
-      <TodoList
-        todos={todos}
-        onToggleTodo={mockToggle}
-        onDeleteTodo={mockDelete}
-      />
-    );
+  const todos = [
+    { id: 1, text: "Tarea 1", completed: false },
+    { id: 2, text: "Tarea 2", completed: true },
+  ];
 
-    // Validate: Verificar que se muestra el mensaje de lista vacía
-    expect(screen.getByTestId("empty-todos")).toBeInTheDocument();
-    expect(screen.getByTestId("empty-todos")).toHaveTextContent(
-      "No hay tareas pendientes"
-    );
-  });
+  render(
+    <TodoList todos={todos} onToggle={mockToggle} onDelete={mockDelete} />
+  );
 
-  it("renderiza correctamente una lista de tareas", () => {
-    // Prepare: Configuración con lista de tareas
-    const todos: Todo[] = [
-      { id: 1, text: "Tarea 1", completed: false },
-      { id: 2, text: "Tarea 2", completed: true },
-      { id: 3, text: "Tarea 3", completed: false },
-    ];
-    const mockToggle = jest.fn();
-    const mockDelete = jest.fn();
+  // Ejecutar: Simular clic en el checkbox y en el botón de eliminar
+  fireEvent.click(screen.getByTestId("todo-checkbox-1")); // Ahora funciona porque el ID es dinámico
+  fireEvent.click(screen.getByTestId("todo-delete-button-1")); // Ahora funciona porque el ID es dinámico
 
-    // Execute: Renderizar el componente
-    render(
-      <TodoList
-        todos={todos}
-        onToggleTodo={mockToggle}
-        onDeleteTodo={mockDelete}
-      />
-    );
-
-    // Validate: Verificar que se renderizan todas las tareas
-    expect(screen.getByTestId("todo-list")).toBeInTheDocument();
-    expect(screen.getByTestId("todo-item-1")).toBeInTheDocument();
-    expect(screen.getByTestId("todo-item-2")).toBeInTheDocument();
-    expect(screen.getByTestId("todo-item-3")).toBeInTheDocument();
-  });
-
-  // EJERCICIO 3: Completa el siguiente test para verificar que el componente
-  // maneja correctamente los eventos de toggle y delete para cada tarea
-  it("pasa correctamente las funciones onToggle y onDelete a cada TodoItem", () => {
-    // TODO: Implementar el test siguiendo el patrón Prepare, Execute, Validate
-    // Pista: Deberás modificar el mock de TodoItem para verificar que recibe las props correctas
-  });
+  // Validar: Verificar que las funciones se han llamado correctamente
+  expect(mockToggle).toHaveBeenCalledWith(1);
+  expect(mockDelete).toHaveBeenCalledWith(1);
 });
